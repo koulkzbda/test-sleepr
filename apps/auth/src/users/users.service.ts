@@ -3,6 +3,7 @@ import { UsersRepository } from './users.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcryptjs';
 import { UserDocument } from './models/user.schema';
+import { GetUserDto } from './dto/get-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -25,7 +26,7 @@ export class UsersService {
     });
   }
 
-  async verifyUser(email: string, password: string) {
+  async verifyUser(email: string, password: string): Promise<UserDocument> {
     const user = await this.usersRepository.findOne({ email });
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
@@ -34,5 +35,9 @@ export class UsersService {
     }
 
     return user;
+  }
+
+  async getUser(getUserDto: GetUserDto): Promise<UserDocument> {
+    return this.usersRepository.findOne(getUserDto);
   }
 }
