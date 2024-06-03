@@ -7,11 +7,11 @@ import { ReservationsRepository } from './reservations.repository';
 export class ReservationsService {
   constructor(private reservationsRepository: ReservationsRepository) {}
 
-  create(createReservationDto: CreateReservationDto) {
+  create(createReservationDto: CreateReservationDto, userId: string) {
     return this.reservationsRepository.create({
       ...createReservationDto,
       timestamp: new Date(),
-      userId: '123',
+      userId,
     });
   }
 
@@ -24,10 +24,7 @@ export class ReservationsService {
   }
 
   update(_id: string, updateReservationDto: UpdateReservationDto) {
-    return this.reservationsRepository.findOneAndUpdate(
-      { _id },
-      { $set: updateReservationDto },
-    );
+    return this.reservationsRepository.findOneAndUpdate({ _id }, { $set: updateReservationDto });
   }
 
   remove(_id: string) {

@@ -6,8 +6,8 @@ import { LoggerModule } from '@app/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
-import { LocalStrategy } from '../strategies/local.strategy';
-import { JwtStrategy } from '../strategies/jwt.strategy';
+import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -18,6 +18,7 @@ import { JwtStrategy } from '../strategies/jwt.strategy';
       validationSchema: Joi.object({
         MONGODB_URI: Joi.string().required(),
         HTTP_PORT: Joi.number().required(),
+        TCP_PORT: Joi.number().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRES_IN: Joi.number().required(),
       }),
