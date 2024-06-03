@@ -16,11 +16,7 @@ export class ReservationDocument extends AbstractDocument {
   userId: string;
 
   @Prop()
-  placeId: string;
-
-  @Prop()
   invoiceId: string;
 }
 
-export const ReservationSchema =
-  SchemaFactory.createForClass(ReservationDocument);
+export const ReservationSchema = SchemaFactory.createForClass(ReservationDocument);
